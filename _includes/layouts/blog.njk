@@ -1,14 +1,34 @@
 ---
 layout: layouts/base.njk
-section: blog
-permalink: /blog/index.html
+section: post
 ---
 <div class="page-container">
-  <h1>{{title}}</h1>
-  {{ layoutContent | safe }}
-	<hr>
+  <article>
+    <img src="{{image}}" style="width:45rem; margin-inline:0; border-radius:1rem">
+    <h1>{{ title }}</h1>
+    <p>
+      <small>
+        <time datetime="{{ date | machineDate }}">{{ date | readableDate }}</time> by <a href="/authors/{{ author | slug }}/">{{ author }}</a>
+      </small>
+    </p>
+    <hr>
 
-  {% set postslist = collections.post %}
-  {% set show_postslist_tags = true %}
-  {% include "components/postslist.njk" %}
+    {{ layoutContent | safe }}
+
+    {% if tags %}
+      <p class="tag-list">
+      {% for tag in tags %}
+        {%- if tag != "post" -%}
+          {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+          <a class="tag" href="{{ tagUrl | url }}" rel="tag">{{ tag }}</a>
+        {%- endif -%}
+      {% endfor %}
+      </p>
+    {% endif %}
+
+  </article>
+
+  <nav>
+    <a href="{{ '/blog/' | url }}">← View All Articles</a>
+  </nav>
 </div>
