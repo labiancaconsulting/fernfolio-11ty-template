@@ -1,5 +1,24 @@
 .article-card {
   margin-top: 35px;
+  display: flex;
+  gap: 2rem;
+}
+
+@media screen and (max-width:576px) {
+    .article-card {
+        flex-direction: column;
+        gap: 0;
+    }
+    .article-image {
+        margin: 0 !important;
+    }
+}
+
+.article-image {
+    width: 30rem !important;
+    border-radius: 1rem;
+    margin-inline: 0 !important;
+    margin-top: 0 !important;
 }
 
 .article-card__title {
